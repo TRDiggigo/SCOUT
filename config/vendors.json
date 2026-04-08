@@ -1,0 +1,116 @@
+{
+  "version": 1,
+  "updated_at": "2026-04-08",
+  "vendors": [
+    {
+      "vendor_id": "mistral-ai",
+      "name": "Mistral AI",
+      "country": "FR",
+      "city": "Paris",
+      "type": "foundation-model-provider",
+      "segment": "agentic-foundation",
+      "tier": "EU-Native",
+      "homepage": "https://mistral.ai",
+      "search_aliases": ["Mistral AI", "Mistral Le Chat"]
+    },
+    {
+      "vendor_id": "aleph-alpha",
+      "name": "Aleph Alpha",
+      "country": "DE",
+      "city": "Heidelberg",
+      "type": "foundation-model-provider",
+      "segment": "sovereign-ai",
+      "tier": "EU-Native",
+      "homepage": "https://aleph-alpha.com",
+      "search_aliases": ["Aleph Alpha", "PhariaAI"]
+    },
+    {
+      "vendor_id": "synthesia",
+      "name": "Synthesia",
+      "country": "GB",
+      "city": "London",
+      "type": "agent-platform",
+      "segment": "media-agents",
+      "tier": "EU-Native",
+      "homepage": "https://www.synthesia.io",
+      "search_aliases": ["Synthesia"]
+    },
+    {
+      "vendor_id": "deepl",
+      "name": "DeepL",
+      "country": "DE",
+      "city": "Köln",
+      "type": "agent-platform",
+      "segment": "language-agents",
+      "tier": "EU-Native",
+      "homepage": "https://www.deepl.com",
+      "search_aliases": ["DeepL", "DeepL Write"]
+    },
+    {
+      "vendor_id": "h-company",
+      "name": "H Company",
+      "country": "FR",
+      "city": "Paris",
+      "type": "agent-platform",
+      "segment": "general-agents",
+      "tier": "EU-Native",
+      "homepage": "https://www.hcompany.ai",
+      "search_aliases": ["H Company", "Holistic AI", "Runner H"]
+    },
+    {
+      "vendor_id": "kyutai",
+      "name": "Kyutai",
+      "country": "FR",
+      "city": "Paris",
+      "type": "foundation-model-provider",
+      "segment": "voice-agents",
+      "tier": "EU-Native",
+      "homepage": "https://kyutai.org",
+      "search_aliases": ["Kyutai", "Moshi"]
+    },
+    {
+      "vendor_id": "silo-ai",
+      "name": "Silo AI",
+      "country": "FI",
+      "city": "Helsinki",
+      "type": "agent-platform",
+      "segment": "industrial-agents",
+      "tier": "EU-Native",
+      "homepage": "https://www.silo.ai",
+      "search_aliases": ["Silo AI", "Poro", "Viking LLM"]
+    },
+    {
+      "vendor_id": "stability-ai",
+      "name": "Stability AI",
+      "country": "GB",
+      "city": "London",
+      "type": "foundation-model-provider",
+      "segment": "media-agents",
+      "tier": "EU-Native",
+      "homepage": "https://stability.ai",
+      "search_aliases": ["Stability AI"]
+    },
+    {
+      "vendor_id": "nyonic",
+      "name": "Nyonic",
+      "country": "DE",
+      "city": "Berlin",
+      "type": "foundation-model-provider",
+      "segment": "sovereign-ai",
+      "tier": "EU-Native",
+      "homepage": "https://www.nyonic.com",
+      "search_aliases": ["Nyonic"]
+    },
+    {
+      "vendor_id": "lingoda-orchestrator",
+      "name": "Lakera",
+      "country": "CH",
+      "city": "Zürich",
+      "type": "agent-platform",
+      "segment": "ai-security-agents",
+      "tier": "EU-Native",
+      "homepage": "https://www.lakera.ai",
+      "search_aliases": ["Lakera", "Lakera Guard"]
+    }
+  ]
+}

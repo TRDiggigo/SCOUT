@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "updated_at": "2026-04-08",
+  "dimensions": {
+    "maturity": {
+      "weight": 0.40,
+      "criteria": [
+        { "key": "production_deployments", "weight": 0.30, "rubric": "≥10 = 100, 5–9 = 70, 1–4 = 40, 0 = 0" },
+        { "key": "arr_estimate_usd", "weight": 0.25, "rubric": "≥10M = 100, 1–10M = 60, <1M = 30, unknown = 20" },
+        { "key": "customer_base", "weight": 0.20, "rubric": "named enterprise refs ≥5 = 100, 1–4 = 60, anecdotal = 30" },
+        { "key": "release_cadence", "weight": 0.15, "rubric": "monthly+ = 100, quarterly = 60, sporadic = 30" },
+        { "key": "case_studies_public", "weight": 0.10, "rubric": "≥3 = 100, 1–2 = 60, 0 = 0" }
+      ]
+    },
+    "integration": {
+      "weight": 0.30,
+      "criteria": [
+        { "key": "connector_count", "weight": 0.25, "rubric": "≥30 = 100, 10–29 = 70, 1–9 = 40, 0 = 0" },
+        { "key": "protocol_support", "weight": 0.25, "rubric": "MCP+REST+GraphQL = 100, two of three = 70, one = 40" },
+        { "key": "self_hosting", "weight": 0.20, "rubric": "fully self-hostable = 100, hybrid = 60, SaaS-only = 20" },
+        { "key": "erp_anbindung", "weight": 0.20, "rubric": "SAP+M365+Salesforce = 100, two of three = 70, one = 40" },
+        { "key": "sdk_languages", "weight": 0.10, "rubric": "≥3 SDKs = 100, 1–2 = 60, none = 0" }
+      ]
+    },
+    "governance": {
+      "weight": 0.30,
+      "criteria": [
+        { "key": "eu_ai_act_readiness", "weight": 0.25, "rubric": "documented compliance roadmap = 100, partial = 60, none = 0" },
+        { "key": "iso_certifications", "weight": 0.20, "rubric": "ISO 42001+27001 = 100, one of two = 60, none = 0" },
+        { "key": "dsgvo_proof", "weight": 0.15, "rubric": "DPA published, EU-host = 100, partial = 60, none = 0" },
+        { "key": "data_residency_eu", "weight": 0.15, "rubric": "EU-only datacenter option = 100, hybrid = 60, US-only = 20" },
+        { "key": "audit_trail", "weight": 0.15, "rubric": "immutable audit log = 100, basic = 60, none = 0" },
+        { "key": "human_in_the_loop", "weight": 0.10, "rubric": "configurable HITL = 100, partial = 60, none = 0" }
+      ]
+    }
+  },
+  "tier_classification": {
+    "EU-Native": "HQ in EU/EWR/CH; primary engineering and data residency in EU.",
+    "EU-Adjacent": "HQ outside EU but contractual EU data residency and EU subsidiary.",
+    "Global": "US/Asia HQ with EU datacenter but no structural EU binding."
+  },
+  "delta_thresholds": {
+    "score_change_min_points": 5,
+    "score_change_warning_points": 10,
+    "missing_days_for_unverified": 3
+  }
+}
