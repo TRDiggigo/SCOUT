@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "updated_at": "2026-04-08",
+  "sources": [
+    {
+      "id": "vendor-blogs",
+      "type": "vendor",
+      "description": "Hersteller-Blogs und Produkt-Release-Notes",
+      "trust_weight": 0.6,
+      "query_template": "{vendor} blog product release {year}"
+    },
+    {
+      "id": "crunchbase-public",
+      "type": "analyst",
+      "description": "Crunchbase Basic (öffentliche Profile)",
+      "trust_weight": 0.8,
+      "query_template": "{vendor} crunchbase funding round"
+    },
+    {
+      "id": "eu-ai-act-portal",
+      "type": "regulator",
+      "description": "EU AI Act Portal, EU-Amtsblatt",
+      "trust_weight": 1.0,
+      "query_template": "{vendor} EU AI Act compliance"
+    },
+    {
+      "id": "github-public",
+      "type": "vendor",
+      "description": "GitHub/npm/PyPI Repos für Release-Frequenz",
+      "trust_weight": 0.7,
+      "query_template": "{vendor} github releases {year}"
+    },
+    {
+      "id": "trade-press",
+      "type": "news",
+      "description": "Fachpresse: TechCrunch, TNW, Handelsblatt, Heise",
+      "trust_weight": 0.6,
+      "query_template": "{vendor} agentic AI European market {year}"
+    },
+    {
+      "id": "iso-certifications",
+      "type": "regulator",
+      "description": "ISO 42001 / 27001 Zertifikatsregister",
+      "trust_weight": 0.9,
+      "query_template": "{vendor} ISO 42001 certification"
+    }
+  ],
+  "query_dimensions": {
+    "maturity": ["funding round", "ARR", "customer references", "production deployments"],
+    "integration": ["MCP support", "API connectors", "SAP integration", "self-hosted deployment"],
+    "governance": ["EU AI Act", "ISO 42001", "GDPR", "data residency Europe"]
+  }
+}

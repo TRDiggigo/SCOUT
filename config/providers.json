@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "updated_at": "2026-04-08",
+  "anthropic": {
+    "research_model": "claude-sonnet-4-6",
+    "extraction_model": "claude-sonnet-4-6",
+    "scoring_model": "claude-opus-4-6",
+    "delta_model": "claude-sonnet-4-6",
+    "report_model": "claude-sonnet-4-6",
+    "web_search_tool": {
+      "type": "web_search_20250305",
+      "max_uses": 5
+    },
+    "max_tokens": 4096,
+    "timeout_ms": 120000,
+    "beta_headers": []
+  },
+  "openai": {
+    "second_opinion_model": "gpt-4o-2024-11-20",
+    "max_tokens": 4096,
+    "timeout_ms": 120000
+  },
+  "limits": {
+    "max_vendor_concurrency": 3,
+    "max_searches_per_vendor": 4,
+    "max_total_searches_per_run": 60,
+    "max_budget_usd_per_run": 10
+  },
+  "scoring": {
+    "second_opinion_confidence_threshold": 0.70,
+    "cross_model_warning_delta_points": 15
+  }
+}
