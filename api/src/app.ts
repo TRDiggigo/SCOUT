@@ -4,6 +4,7 @@ import { type InternalRole } from './auth/role-mapper.js';
 import { registerErrorHandler } from './middleware/error-handler.js';
 import { authenticateRequest } from './middleware/auth.js';
 import { requireRoles } from './middleware/role-guard.js';
+import { registerDashboardRoutes } from './routes/dashboard.routes.js';
 
 const API_PREFIX = '/api/v1';
 const CORRELATION_HEADER = 'x-correlation-id';
@@ -52,6 +53,8 @@ export function buildApp(): FastifyInstance {
           authProvider: request.user?.authProvider,
         }),
       );
+
+      await registerDashboardRoutes(versionedRoutes);
 
       versionedRoutes.get(
         '/auth/admin-probe',

@@ -1,7 +1,7 @@
 import { createBrowserRouter, Navigate, type RouteObject } from 'react-router-dom';
 
 import { AppShell } from './AppShell';
-import { DashboardPage } from '../pages/app/DashboardPage';
+import { DashboardPage } from '../pages/dashboard';
 import { VendorListPage } from '../pages/app/VendorListPage';
 import { DeltaListPage } from '../pages/app/DeltaListPage';
 import { EvidenceListPage } from '../pages/app/EvidenceListPage';
