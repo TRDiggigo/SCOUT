@@ -2,7 +2,7 @@ import { createBrowserRouter, Navigate, type RouteObject } from 'react-router-do
 
 import { AppShell } from './AppShell';
 import { DashboardPage } from '../pages/dashboard';
-import { VendorListPage } from '../pages/vendors';
+import { VendorDetailPage, VendorListPage } from '../pages/vendors';
 import { DeltaListPage } from '../pages/app/DeltaListPage';
 import { EvidenceListPage } from '../pages/app/EvidenceListPage';
 import { ReportListPage } from '../pages/app/ReportListPage';
@@ -34,6 +34,15 @@ export const appRoutes: RouteObject[] = [
         element: (
           <RoleGuard allowedRoles={['ROLE_VIEWER', 'ROLE_ANALYST', 'ROLE_LEAD_ANALYST', 'ROLE_OPERATOR', 'ROLE_ADMIN', 'ROLE_GOVERNANCE_OWNER']}>
             <VendorListPage />
+          </RoleGuard>
+        ),
+      },
+
+      {
+        path: 'app/vendors/:vendorId',
+        element: (
+          <RoleGuard allowedRoles={['ROLE_VIEWER', 'ROLE_ANALYST', 'ROLE_LEAD_ANALYST', 'ROLE_OPERATOR', 'ROLE_ADMIN', 'ROLE_GOVERNANCE_OWNER']}>
+            <VendorDetailPage />
           </RoleGuard>
         ),
       },

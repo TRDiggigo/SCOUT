@@ -7,9 +7,56 @@ beforeEach(() => {
     vi.fn(async (input: RequestInfo | URL) => {
       const url = typeof input === 'string' ? input : input.toString();
 
+      if (/\/api\/v1\/vendors\/[^?]+$/.test(url)) {
+        return {
+          ok: true,
+          status: 200,
+          json: async () => ({
+            vendorId: 'vendor-001',
+            vendorName: 'Alpha AI',
+            legalEntityName: 'Alpha AI GmbH',
+            websiteUrl: 'https://alpha.example.com',
+            headquartersCountry: 'DE',
+            euPresence: true,
+            category: 'platform',
+            shortDescription: 'Enterprise AI platform.',
+            trackingStatus: 'active',
+            reviewQueueReason: null,
+            marketMaturityScore: 82,
+            integrationScore: 77,
+            governanceScore: 80,
+            overallScore: 80,
+            confidence: 88,
+            confidenceReason: 'Strong public signal coverage.',
+            scoringRubricVersion: 'v1.0.0',
+            secondOpinionModel: 'gpt-4.1-mini',
+            scoreDivergencePct: 6.5,
+            asOfDate: '2026-04-11',
+            sourceRunId: 'run-2026-04-11-001',
+            freshnessStatus: 'fresh',
+            latestRunId: 'run-2026-04-11-001',
+            latestManifestRef: 'latest.manifest.json',
+            snapshotPath: '/snapshots/2026-04-11/vendor-001.json',
+            euHostingClaim: true,
+            dataResidencyEu: 'yes',
+            identityIntegration: 'sso_scim',
+            ssoSupport: true,
+            auditLoggingClaim: true,
+            complianceClaims: ['ISO27001', 'SOC2'],
+            securityDisclosures: 'Public trust center available.',
+            humanReviewRequired: false,
+            sourceCount: 14,
+            latestEvidenceCount: 8,
+            primarySources: ['vendor docs', 'trust center', 'pricing page'],
+            sourceQualityFlag: 'high',
+          }),
+        };
+      }
+
       if (url.includes('/api/v1/vendors')) {
         return {
           ok: true,
+          status: 200,
           json: async () => ({
             items: [
               {
@@ -40,6 +87,7 @@ beforeEach(() => {
 
       return {
         ok: true,
+        status: 200,
         json: async () => ({
           latestRun: {
             runId: 'run-2026-04-11-001',

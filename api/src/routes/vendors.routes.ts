@@ -1,6 +1,7 @@
 import type { FastifyInstance } from 'fastify';
 
 import { VendorService, type VendorListQueryDto } from '../services/vendor.service.js';
+import { ApiError } from '../util/response.js';
 
 interface VendorListRequestQuery {
   category?: VendorListQueryDto['category'];
@@ -11,6 +12,10 @@ interface VendorListRequestQuery {
   sortOrder?: VendorListQueryDto['sortOrder'];
   page?: string;
   pageSize?: string;
+}
+
+interface VendorDetailRequestParams {
+  vendorId: string;
 }
 
 function parseBoolean(input: string | undefined): boolean | undefined {
@@ -36,5 +41,19 @@ export async function registerVendorRoutes(app: FastifyInstance): Promise<void> 
       page: query.page ? Number(query.page) : undefined,
       pageSize: query.pageSize ? Number(query.pageSize) : undefined,
     });
+  });
+
+  app.get<{ Params: VendorDetailRequestParams }>('/vendors/:vendorId', async (request) => {
+    const detail = await vendorService.getVendorById(request.params.vendorId);
+
+    if (!detail) {
+      throw new ApiError({
+        code: 'not_found',
+        message: 'Vendor detail not found.',
+        statusCode: 404,
+      });
+    }
+
+    return detail;
   });
 }

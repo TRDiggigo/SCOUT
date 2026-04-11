@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import type { VendorListItemDto } from '../types';
 
 interface VendorTableProps {
@@ -31,7 +33,9 @@ export function VendorTable({ items }: VendorTableProps): JSX.Element {
         {items.map((item) => (
           <tr key={item.vendorId}>
             <td>{item.vendorId}</td>
-            <td>{item.vendorName}</td>
+            <td>
+              <Link to={`/app/vendors/${item.vendorId}`}>{item.vendorName}</Link>
+            </td>
             <td>{item.country}</td>
             <td>{item.regionScope}</td>
             <td>{item.category}</td>

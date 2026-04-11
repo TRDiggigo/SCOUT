@@ -17,6 +17,46 @@ export interface VendorListItemDto {
   openEscalation: boolean;
 }
 
+export interface VendorDetailDto {
+  vendorId: string;
+  vendorName: string;
+  legalEntityName: string;
+  websiteUrl: string;
+  headquartersCountry: string;
+  euPresence: boolean;
+  category: VendorListItemDto['category'];
+  shortDescription: string;
+  trackingStatus: VendorListItemDto['trackingStatus'];
+  reviewQueueReason: string | null;
+  marketMaturityScore: number;
+  integrationScore: number;
+  governanceScore: number;
+  overallScore: number;
+  confidence: number;
+  confidenceReason: string;
+  scoringRubricVersion: string;
+  secondOpinionModel: string;
+  scoreDivergencePct: number;
+  asOfDate: string;
+  sourceRunId: string;
+  freshnessStatus: VendorListItemDto['freshnessStatus'];
+  latestRunId: string;
+  latestManifestRef: string;
+  snapshotPath: string;
+  euHostingClaim: boolean;
+  dataResidencyEu: 'yes' | 'partial' | 'no' | 'unknown';
+  identityIntegration: 'none' | 'sso' | 'scim' | 'sso_scim' | 'unknown';
+  ssoSupport: boolean;
+  auditLoggingClaim: boolean;
+  complianceClaims: string[];
+  securityDisclosures: string;
+  humanReviewRequired: boolean;
+  sourceCount: number;
+  latestEvidenceCount: number;
+  primarySources: string[];
+  sourceQualityFlag: 'high' | 'medium' | 'low' | 'mixed';
+}
+
 export interface VendorListResponseDto {
   items: VendorListItemDto[];
   page: number;

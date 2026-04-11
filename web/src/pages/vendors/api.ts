@@ -1,4 +1,4 @@
-import type { VendorListQueryState, VendorListResponseDto } from './types';
+import type { VendorDetailDto, VendorListQueryState, VendorListResponseDto } from './types';
 
 function toSearchParams(query: VendorListQueryState): URLSearchParams {
   const params = new URLSearchParams();
@@ -25,4 +25,18 @@ export async function fetchVendorList(query: VendorListQueryState): Promise<Vend
   }
 
   return (await response.json()) as VendorListResponseDto;
+}
+
+export async function fetchVendorDetail(vendorId: string): Promise<VendorDetailDto> {
+  const response = await fetch(`/api/v1/vendors/${vendorId}`);
+
+  if (response.status === 404) {
+    throw new Error('not_found');
+  }
+
+  if (!response.ok) {
+    throw new Error('Vendor detail request failed.');
+  }
+
+  return (await response.json()) as VendorDetailDto;
 }
