@@ -5,6 +5,7 @@ import { registerErrorHandler } from './middleware/error-handler.js';
 import { authenticateRequest } from './middleware/auth.js';
 import { requireRoles } from './middleware/role-guard.js';
 import { registerDashboardRoutes } from './routes/dashboard.routes.js';
+import { registerVendorRoutes } from './routes/vendors.routes.js';
 
 const API_PREFIX = '/api/v1';
 const CORRELATION_HEADER = 'x-correlation-id';
@@ -55,6 +56,7 @@ export function buildApp(): FastifyInstance {
       );
 
       await registerDashboardRoutes(versionedRoutes);
+      await registerVendorRoutes(versionedRoutes);
 
       versionedRoutes.get(
         '/auth/admin-probe',
