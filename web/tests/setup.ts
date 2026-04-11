@@ -54,6 +54,34 @@ beforeEach(() => {
       }
 
 
+
+      if (url.includes('/api/v1/errors')) {
+        return {
+          ok: true,
+          status: 200,
+          json: async () => ({
+            items: [
+              {
+                errorId: 'err-001',
+                runId: 'run-2026-04-11-001',
+                vendorId: 'vendor-003',
+                stage: 'A2',
+                errorType: 'extraction_error',
+                severity: 'high',
+                message: 'Extraction schema mismatch for governance block.',
+                firstSeenAt: '2026-04-11T06:05:00Z',
+                retryStatus: 'queued',
+                resolutionStatus: 'open',
+                assignedTo: 'operator-1',
+              },
+            ],
+            page: 1,
+            pageSize: 10,
+            total: 1,
+          }),
+        };
+      }
+
       if (url.includes('/api/v1/runs')) {
         return {
           ok: true,
