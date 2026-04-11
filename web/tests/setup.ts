@@ -53,6 +53,39 @@ beforeEach(() => {
         };
       }
 
+
+      if (url.includes('/api/v1/runs')) {
+        return {
+          ok: true,
+          status: 200,
+          json: async () => ({
+            items: [
+              {
+                runId: 'run-2026-04-11-001',
+                runDate: '2026-04-11',
+                startedAt: '2026-04-11T06:00:00Z',
+                finishedAt: '2026-04-11T06:22:00Z',
+                status: 'success',
+                mode: 'scheduled',
+                vendorScope: 'all-active',
+                totalVendors: 50,
+                successVendors: 48,
+                failedVendors: 1,
+                staleVendors: 1,
+                budgetUsedUsd: 123.45,
+                budgetLimitUsd: 500,
+                concurrencyLimit: 5,
+                initiatedBy: 'scheduler',
+                manifestRef: 'runs/2026-04-11-001/manifest.json',
+              },
+            ],
+            page: 1,
+            pageSize: 10,
+            total: 1,
+          }),
+        };
+      }
+
       if (url.includes('/api/v1/vendors')) {
         return {
           ok: true,

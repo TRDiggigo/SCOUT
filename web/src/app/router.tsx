@@ -6,7 +6,7 @@ import { VendorDetailPage, VendorListPage } from '../pages/vendors';
 import { DeltaListPage } from '../pages/app/DeltaListPage';
 import { EvidenceListPage } from '../pages/app/EvidenceListPage';
 import { ReportListPage } from '../pages/app/ReportListPage';
-import { RunListPage } from '../pages/admin/RunListPage';
+import { RunListPage } from '../pages/runs';
 import { ErrorListPage } from '../pages/admin/ErrorListPage';
 import { ConfigPage } from '../pages/admin/ConfigPage';
 import { AuditListPage } from '../pages/admin/AuditListPage';
