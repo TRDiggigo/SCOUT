@@ -1,0 +1,70 @@
+name: scout-run
+
+# IMPORTANT: GitHub Actions schedule: only fires on the default branch.
+# workflow_dispatch must also exist on the default branch (main) to be triggerable.
+# For the 5-day acceptance test on a feature branch, merge this file to main first,
+# then run via:
+#   gh workflow run scout-run.yml --ref claude/scout-agent-system-i20Oz -f date=2026-04-08
+
+on:
+  schedule:
+    # Daily at 06:00 Europe/Berlin (only fires once this is on the default branch).
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+    inputs:
+      date:
+        description: "Run date (YYYY-MM-DD), defaults to today UTC"
+        required: false
+        type: string
+      vendors:
+        description: "Comma-separated vendor_id filter"
+        required: false
+        type: string
+      dry_run:
+        description: "Skip SharePoint writes"
+        required: false
+        type: boolean
+        default: false
+
+concurrency:
+  group: scout-run-${{ github.event.inputs.date || github.run_id }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  run:
+    name: SCOUT daily pipeline
+    runs-on: ubuntu-latest
+    timeout-minutes: 60  # AK-09: Time-to-Insight ≤60 min
+    env:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      GRAPH_TENANT_ID: ${{ secrets.GRAPH_TENANT_ID }}
+      GRAPH_CLIENT_ID: ${{ secrets.GRAPH_CLIENT_ID }}
+      GRAPH_CLIENT_SECRET: ${{ secrets.GRAPH_CLIENT_SECRET }}
+      SCOUT_SITE_HOSTNAME: ${{ vars.SCOUT_SITE_HOSTNAME || 'domainzwo.sharepoint.com' }}
+      SCOUT_SITE_PATH: ${{ vars.SCOUT_SITE_PATH || '/sites/scout' }}
+      SCOUT_LOG_LEVEL: info
+      TZ: Europe/Berlin
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install
+        run: npm ci || npm install
+      - name: Test
+        run: npm test
+      - name: Validate config (local)
+        run: node src/index.js validate-config --local
+      - name: Run pipeline
+        run: |
+          DATE_ARG=""
+          if [ -n "${{ github.event.inputs.date }}" ]; then DATE_ARG="--date=${{ github.event.inputs.date }}"; fi
+          VENDOR_ARG=""
+          if [ -n "${{ github.event.inputs.vendors }}" ]; then VENDOR_ARG="--vendors=${{ github.event.inputs.vendors }}"; fi
+          DRY_ARG=""
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then DRY_ARG="--dry-run"; fi
+          node src/index.js run $DATE_ARG $VENDOR_ARG $DRY_ARG
