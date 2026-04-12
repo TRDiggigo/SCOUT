@@ -11,6 +11,7 @@ const navigationSections: SideNavSection[] = [
     links: [
       { label: 'Dashboard', to: '/app/dashboard' },
       { label: 'Vendors', to: '/app/vendors' },
+      { label: 'Compare', to: '/app/vendors/compare' },
       { label: 'Deltas', to: '/app/deltas' },
       { label: 'Evidence', to: '/app/evidence' },
       { label: 'Reports', to: '/app/reports' },

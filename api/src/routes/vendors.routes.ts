@@ -1,4 +1,5 @@
 import type { FastifyInstance } from 'fastify';
+import { z } from 'zod';
 
 import { VendorService, type VendorListQueryDto } from '../services/vendor.service.js';
 import { ApiError } from '../util/response.js';
@@ -17,6 +18,16 @@ interface VendorListRequestQuery {
 interface VendorDetailRequestParams {
   vendorId: string;
 }
+
+const vendorCompareBodySchema = z.object({
+  vendorIds: z
+    .array(z.string().min(1))
+    .min(2, 'At least 2 vendor IDs are required.')
+    .max(5, 'At most 5 vendor IDs are supported.')
+    .refine((vendorIds) => new Set(vendorIds).size === vendorIds.length, 'Vendor IDs must be unique.'),
+});
+
+type VendorCompareBody = z.infer<typeof vendorCompareBodySchema>;
 
 function parseBoolean(input: string | undefined): boolean | undefined {
   if (input === undefined) return undefined;
@@ -55,5 +66,19 @@ export async function registerVendorRoutes(app: FastifyInstance): Promise<void> 
     }
 
     return detail;
+  });
+
+  app.post<{ Body: VendorCompareBody }>('/vendors/compare', async (request) => {
+    const parsedBody = vendorCompareBodySchema.safeParse(request.body);
+
+    if (!parsedBody.success) {
+      throw new ApiError({
+        code: 'validation_error',
+        message: parsedBody.error.issues[0]?.message ?? 'Invalid compare request body.',
+        statusCode: 400,
+      });
+    }
+
+    return vendorService.compareVendors(parsedBody.data);
   });
 }
