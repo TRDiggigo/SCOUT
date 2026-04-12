@@ -1,4 +1,4 @@
-import type { VendorDetailDto, VendorListQueryState, VendorListResponseDto } from './types';
+import type { VendorCompareResponseDto, VendorDetailDto, VendorListQueryState, VendorListResponseDto } from './types';
 
 function toSearchParams(query: VendorListQueryState): URLSearchParams {
   const params = new URLSearchParams();
@@ -39,4 +39,19 @@ export async function fetchVendorDetail(vendorId: string): Promise<VendorDetailD
   }
 
   return (await response.json()) as VendorDetailDto;
+}
+
+export async function compareVendors(vendorIds: string[]): Promise<VendorCompareResponseDto> {
+  const response = await fetch('/api/v1/vendors/compare', {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json',
+    },
+    body: JSON.stringify({ vendorIds }),
+  });
+
+  if (response.status === 400) throw new Error('validation_error');
+  if (!response.ok) throw new Error('Vendor compare request failed.');
+
+  return (await response.json()) as VendorCompareResponseDto;
 }

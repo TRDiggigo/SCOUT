@@ -75,6 +75,25 @@ export interface VendorListResponseDto {
   total: number;
 }
 
+export interface VendorCompareRequestDto {
+  vendorIds: string[];
+}
+
+export interface VendorCompareItemDto {
+  vendorId: string;
+  vendorName: string;
+  category: VendorListItemDto['category'];
+  overallScore: number;
+  confidence: number;
+  freshnessStatus: VendorListItemDto['freshnessStatus'];
+  asOfDate: string;
+  sourceRunId: string;
+}
+
+export interface VendorCompareResponseDto {
+  items: VendorCompareItemDto[];
+}
+
 const STUB_VENDORS: VendorListItemDto[] = [
   { vendorId: 'vendor-001', vendorName: 'Alpha AI', country: 'DE', regionScope: 'EU', category: 'platform', trackingStatus: 'active', marketMaturityScore: 82, integrationScore: 77, governanceScore: 80, overallScore: 80, confidence: 88, freshnessStatus: 'fresh', asOfDate: '2026-04-11', sourceRunId: 'run-2026-04-11-001', deltaStatus: 'changed', openEscalation: false },
   { vendorId: 'vendor-002', vendorName: 'Beta Stack', country: 'US', regionScope: 'Global-EU', category: 'framework', trackingStatus: 'active', marketMaturityScore: 70, integrationScore: 72, governanceScore: 68, overallScore: 70, confidence: 76, freshnessStatus: 'stale', asOfDate: '2026-04-09', sourceRunId: 'run-2026-04-11-001', deltaStatus: 'no_change', openEscalation: true },
@@ -145,5 +164,23 @@ export class VendorService {
 
   public async getVendorById(vendorId: string): Promise<VendorDetailDto | null> {
     return STUB_VENDOR_DETAILS[vendorId] ?? null;
+  }
+
+  public async compareVendors(request: VendorCompareRequestDto): Promise<VendorCompareResponseDto> {
+    const items = request.vendorIds
+      .map((vendorId) => STUB_VENDORS.find((item) => item.vendorId === vendorId))
+      .filter((item): item is VendorListItemDto => Boolean(item))
+      .map((item) => ({
+        vendorId: item.vendorId,
+        vendorName: item.vendorName,
+        category: item.category,
+        overallScore: item.overallScore,
+        confidence: item.confidence,
+        freshnessStatus: item.freshnessStatus,
+        asOfDate: item.asOfDate,
+        sourceRunId: item.sourceRunId,
+      }));
+
+    return { items };
   }
 }

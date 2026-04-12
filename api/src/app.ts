@@ -9,6 +9,8 @@ import { registerVendorRoutes } from './routes/vendors.routes.js';
 import { registerRunRoutes } from './routes/runs.routes.js';
 import { registerErrorRoutes } from './routes/errors.routes.js';
 import { registerDeltaRoutes } from './routes/deltas.routes.js';
+import { registerEvidenceRoutes } from './routes/evidence.routes.js';
+import { registerReportRoutes } from './routes/reports.routes.js';
 
 const API_PREFIX = '/api/v1';
 const CORRELATION_HEADER = 'x-correlation-id';
@@ -63,6 +65,8 @@ export function buildApp(): FastifyInstance {
       await registerRunRoutes(versionedRoutes);
       await registerErrorRoutes(versionedRoutes);
       await registerDeltaRoutes(versionedRoutes);
+      await registerEvidenceRoutes(versionedRoutes);
+      await registerReportRoutes(versionedRoutes);
 
       versionedRoutes.get(
         '/auth/admin-probe',

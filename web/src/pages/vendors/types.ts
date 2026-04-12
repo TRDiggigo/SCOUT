@@ -74,3 +74,18 @@ export interface VendorListQueryState {
   page: number;
   pageSize: number;
 }
+
+export interface VendorCompareItemDto {
+  vendorId: string;
+  vendorName: string;
+  category: VendorListItemDto['category'];
+  overallScore: number;
+  confidence: number;
+  freshnessStatus: VendorListItemDto['freshnessStatus'];
+  asOfDate: string;
+  sourceRunId: string;
+}
+
+export interface VendorCompareResponseDto {
+  items: VendorCompareItemDto[];
+}

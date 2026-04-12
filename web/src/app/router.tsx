@@ -2,10 +2,10 @@ import { createBrowserRouter, Navigate, type RouteObject } from 'react-router-do
 
 import { AppShell } from './AppShell';
 import { DashboardPage } from '../pages/dashboard';
-import { VendorDetailPage, VendorListPage } from '../pages/vendors';
+import { VendorComparePage, VendorDetailPage, VendorListPage } from '../pages/vendors';
 import { DeltaDetailPage, DeltaListPage } from '../pages/deltas';
-import { EvidenceListPage } from '../pages/app/EvidenceListPage';
-import { ReportListPage } from '../pages/app/ReportListPage';
+import { EvidenceDetailPage, EvidenceListPage } from '../pages/evidence';
+import { ReportDetailPage, ReportListPage } from '../pages/reports';
 import { RunListPage } from '../pages/runs';
 import { ErrorListPage } from '../pages/errors';
 import { ConfigPage } from '../pages/admin/ConfigPage';
@@ -72,10 +72,34 @@ export const appRoutes: RouteObject[] = [
         ),
       },
       {
+        path: 'app/evidence/:evidenceId',
+        element: (
+          <RoleGuard allowedRoles={['ROLE_VIEWER', 'ROLE_ANALYST', 'ROLE_LEAD_ANALYST', 'ROLE_OPERATOR', 'ROLE_ADMIN', 'ROLE_GOVERNANCE_OWNER']}>
+            <EvidenceDetailPage />
+          </RoleGuard>
+        ),
+      },
+      {
         path: 'app/reports',
         element: (
           <RoleGuard allowedRoles={['ROLE_VIEWER', 'ROLE_ANALYST', 'ROLE_LEAD_ANALYST', 'ROLE_OPERATOR', 'ROLE_ADMIN', 'ROLE_GOVERNANCE_OWNER']}>
             <ReportListPage />
+          </RoleGuard>
+        ),
+      },
+      {
+        path: 'app/reports/:reportId',
+        element: (
+          <RoleGuard allowedRoles={['ROLE_VIEWER', 'ROLE_ANALYST', 'ROLE_LEAD_ANALYST', 'ROLE_OPERATOR', 'ROLE_ADMIN', 'ROLE_GOVERNANCE_OWNER']}>
+            <ReportDetailPage />
+          </RoleGuard>
+        ),
+      },
+      {
+        path: 'app/vendors/compare',
+        element: (
+          <RoleGuard allowedRoles={['ROLE_VIEWER', 'ROLE_ANALYST', 'ROLE_LEAD_ANALYST', 'ROLE_OPERATOR', 'ROLE_ADMIN', 'ROLE_GOVERNANCE_OWNER']}>
+            <VendorComparePage />
           </RoleGuard>
         ),
       },
