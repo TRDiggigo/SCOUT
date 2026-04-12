@@ -1,13 +1,13 @@
 import { createBrowserRouter, Navigate, type RouteObject } from 'react-router-dom';
 
 import { AppShell } from './AppShell';
-import { DashboardPage } from '../pages/app/DashboardPage';
-import { VendorListPage } from '../pages/app/VendorListPage';
-import { DeltaListPage } from '../pages/app/DeltaListPage';
+import { DashboardPage } from '../pages/dashboard';
+import { VendorDetailPage, VendorListPage } from '../pages/vendors';
+import { DeltaDetailPage, DeltaListPage } from '../pages/deltas';
 import { EvidenceListPage } from '../pages/app/EvidenceListPage';
 import { ReportListPage } from '../pages/app/ReportListPage';
-import { RunListPage } from '../pages/admin/RunListPage';
-import { ErrorListPage } from '../pages/admin/ErrorListPage';
+import { RunListPage } from '../pages/runs';
+import { ErrorListPage } from '../pages/errors';
 import { ConfigPage } from '../pages/admin/ConfigPage';
 import { AuditListPage } from '../pages/admin/AuditListPage';
 import { UserAdminPage } from '../pages/admin/UserAdminPage';
@@ -37,11 +37,29 @@ export const appRoutes: RouteObject[] = [
           </RoleGuard>
         ),
       },
+
+      {
+        path: 'app/vendors/:vendorId',
+        element: (
+          <RoleGuard allowedRoles={['ROLE_VIEWER', 'ROLE_ANALYST', 'ROLE_LEAD_ANALYST', 'ROLE_OPERATOR', 'ROLE_ADMIN', 'ROLE_GOVERNANCE_OWNER']}>
+            <VendorDetailPage />
+          </RoleGuard>
+        ),
+      },
       {
         path: 'app/deltas',
         element: (
           <RoleGuard allowedRoles={['ROLE_VIEWER', 'ROLE_ANALYST', 'ROLE_LEAD_ANALYST', 'ROLE_OPERATOR', 'ROLE_ADMIN', 'ROLE_GOVERNANCE_OWNER']}>
             <DeltaListPage />
+          </RoleGuard>
+        ),
+      },
+
+      {
+        path: 'app/deltas/:deltaId',
+        element: (
+          <RoleGuard allowedRoles={['ROLE_VIEWER', 'ROLE_ANALYST', 'ROLE_LEAD_ANALYST', 'ROLE_OPERATOR', 'ROLE_ADMIN', 'ROLE_GOVERNANCE_OWNER']}>
+            <DeltaDetailPage />
           </RoleGuard>
         ),
       },
