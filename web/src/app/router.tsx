@@ -3,7 +3,7 @@ import { createBrowserRouter, Navigate, type RouteObject } from 'react-router-do
 import { AppShell } from './AppShell';
 import { DashboardPage } from '../pages/dashboard';
 import { VendorDetailPage, VendorListPage } from '../pages/vendors';
-import { DeltaListPage } from '../pages/app/DeltaListPage';
+import { DeltaDetailPage, DeltaListPage } from '../pages/deltas';
 import { EvidenceListPage } from '../pages/app/EvidenceListPage';
 import { ReportListPage } from '../pages/app/ReportListPage';
 import { RunListPage } from '../pages/runs';
@@ -51,6 +51,15 @@ export const appRoutes: RouteObject[] = [
         element: (
           <RoleGuard allowedRoles={['ROLE_VIEWER', 'ROLE_ANALYST', 'ROLE_LEAD_ANALYST', 'ROLE_OPERATOR', 'ROLE_ADMIN', 'ROLE_GOVERNANCE_OWNER']}>
             <DeltaListPage />
+          </RoleGuard>
+        ),
+      },
+
+      {
+        path: 'app/deltas/:deltaId',
+        element: (
+          <RoleGuard allowedRoles={['ROLE_VIEWER', 'ROLE_ANALYST', 'ROLE_LEAD_ANALYST', 'ROLE_OPERATOR', 'ROLE_ADMIN', 'ROLE_GOVERNANCE_OWNER']}>
+            <DeltaDetailPage />
           </RoleGuard>
         ),
       },

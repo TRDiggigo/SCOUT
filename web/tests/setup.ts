@@ -55,6 +55,54 @@ beforeEach(() => {
 
 
 
+
+      if (/\/api\/v1\/deltas\/[^?]+$/.test(url)) {
+        return {
+          ok: true,
+          status: 200,
+          json: async () => ({
+            deltaId: 'delta-001',
+            deltaSummary: 'Governance score increased for Alpha AI.',
+            rationale: 'New public audit documentation was detected.',
+            evidenceRefs: ['evidence-1001', 'evidence-1002'],
+            oldStructuredState: { governanceScore: 76 },
+            newStructuredState: { governanceScore: 80 },
+            changeReasoning: 'Evidence indicates additional compliance attestations.',
+            escalationTriggered: false,
+            escalationRef: null,
+          }),
+        };
+      }
+
+      if (url.includes('/api/v1/deltas')) {
+        return {
+          ok: true,
+          status: 200,
+          json: async () => ({
+            items: [
+              {
+                deltaId: 'delta-001',
+                vendorId: 'vendor-001',
+                vendorName: 'Alpha AI',
+                deltaDate: '2026-04-11',
+                deltaType: 'score_change',
+                impactedDimension: 'governance',
+                oldValue: '76',
+                newValue: '80',
+                severity: 'medium',
+                confidence: 84,
+                sourceRunId: 'run-2026-04-11-001',
+                detectedBy: 'delta-detector-v1',
+                reviewStatus: 'open',
+              },
+            ],
+            page: 1,
+            pageSize: 10,
+            total: 1,
+          }),
+        };
+      }
+
       if (url.includes('/api/v1/errors')) {
         return {
           ok: true,
